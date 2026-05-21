@@ -47,7 +47,7 @@ exports.getUserRank = async (req, res) => {
 
     res.json({
       userId,
-      rank: rank + 1, // 0-based -> 1-based
+      rank: rank + 1, // Because: Redis starts from 0 , Humans expect rank starting from 1
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
