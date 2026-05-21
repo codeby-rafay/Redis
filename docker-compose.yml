@@ -1,0 +1,24 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: redis
+    volumes:
+      - mongo_data:/data/db
+
+# agr restart bhi krdia to data hamara persistent rhy ga, yhi kaam hai volumes ka
+volumes:
+  redis_data:
+  mongo_data:
